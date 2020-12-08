@@ -15,8 +15,55 @@
                         上述指令中的<target>是指通过add_executable()和add_library()指令生成已经创建的目标文件。而[item]表示库文件没有后缀的名字。默认情况下，库依赖项是传递的。当这个目标链接到另一个目标时，链接到这个目标的库也会出现在另一个目标的连接线上。这个传递的接口存储在interface_link_libraries的目标属性中，可以通过设置该属性直接重写传递接口。
               
               
-              
+          工具 jni 打印log   https://blog.csdn.net/yf210yf/article/details/9305623
+                #include<android/log.h>
+                #define TAG "myDemo-jni" // 这个是自定义的LOG的标识 
+                #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,TAG ,__VA_ARGS__) // 定义LOGD类型 
+                #define LOGI(...) __android_log_print(ANDROID_LOG_INFO,TAG ,__VA_ARGS__) // 定义LOGI类型 
+                #define LOGW(...) __android_log_print(ANDROID_LOG_WARN,TAG ,__VA_ARGS__) // 定义LOGW类型 
+                #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG ,__VA_ARGS__) // 定义LOGE类型 
+                #define LOGF(...) __android_log_print(ANDROID_LOG_FATAL,TAG ,__VA_ARGS__) // 定义LOGF类型 
+                LOGD("########## i = %d", i);//int 用%d
+                 LOGD("########## i = %f", i);//浮点型应该使用%f，而不是使用%d
+                
+          
+          
               
           语法：
               JNIEnv* env参数     JNIEnv类型实际上代表了Java环境，通过这个JNIEnv* 指针，就可以对Java端的代码进行操作。例如，创建Java类中的对象，调用Java对象的方法，获取Java对象中的属性等等    
+                              java 类型    jni 定义的别名  
+                              int              jint/jsize
+                              long             jlong
+                              byte             jbyte
+                              boolean          jboolean
+                              char             jchar
+                              short            jshort 
+                              float            jfloat
+                              double           jdouble
+                              object           jobject
+                     jclass  表示java 中的class 如  jclass GetObjectClass(jobject obj)  通过对象实例来获取jclass，相当于java中的getClass方法
+                     
+                     
+              签名 用来表示要取得的属性/方法的类型
+              
+              类型 ---------------------->相应的签名
+              boolean                     Z
+              byte                        B
+              char                        C
+              short                       S
+              int                         I
+              long                        L
+              float                       F
+              double                      D
+              void                        V
+              object                      L 用/分隔包的完整类名 如 Ljava/lang/string
+              Array                       [签名        [I [Ljava/lang/object;    
+              method                      (参数1类型签名 参数2类型签名...)返回值类型签名        
+              
+              
+                        
+                           
+                               
+                              
+                     
                               

@@ -7,6 +7,7 @@ import com.example.androidjnidev.NativeListener;
  */
 
 public class JNITest {
+    public  int number = 10;//定义一个属性
     static {
         try{
             System.loadLibrary("native-test");
@@ -20,4 +21,14 @@ public class JNITest {
      * @param listener
      */
     public static native void registerListener(NativeListener listener);
+
+    public  native void sayHello();
+
+
+    //jni 调用 java
+    public native void jniCallJava();
+
+    public double maxValue(double d1,double d2){
+        return Math.max(d1, d2);
+    }
 }
